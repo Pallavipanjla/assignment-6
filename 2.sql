@@ -1,12 +1,20 @@
-CREATE TABLE Employee(employee_id INT PRIMARY KEY AUTO_INCREMENT,
-name CHAR(20) NOT NULL, exp INT CHECK(exp>=2), 
-salary INT CHECK(salary BETWEEN 12000 AND 30000),
+CREATE TABLE Employee(
+employee_id INT PRIMARY KEY AUTO_INCREMENT,
+name CHAR(20) NOT NULL,
+exp INT CHECK(exp>=2), 
+salary INT CHECK(salary BETWEEN 5000 AND 30000),
 department_name CHAR(20) CHECK(department_name IN('HR','Sales','Accts','IT')), 
-manager_name CHAR(20));
+manager_name CHAR(20)
+);
+
 ALTER TABLE Employee AUTO_INCREMENT=100;
 
-INSERT INTO Employee(name,exp,salary,department_name,manager_name) VALUES ('Aman',3,15000,'HR','Payal'),('Pallavi',5,25000,'Sales','Rohit'),('Meena',4,22000,'IT','Raj'),('Advik',6,28000,'Accts','Ravi'),('Ajay',7,30000,'HR','Rohit');
-
+INSERT INTO Employee(name,exp,salary,department_name,manager_name) 
+VALUES ('Aman',3,8000,'HR','Payal'),
+('Pallavi',5,25000,'Sales','Rohit'),
+('Meena',4,22000,'IT','Raj'),
+('Advik',6,28000,'Accts','Ravi'),
+('Ajay',7,10000,'HR','Rohit');
 -- Q-1
 SELECT employee_id,name,salary FROM Employee;
 
@@ -79,7 +87,10 @@ SELECT * FROM Employee WHERE name LIKE 'A%';
 SELECT * FROM Employee WHERE name LIKE '%a%';
 
 -- Q-24
-SELECT department_name,AVG(salary) AS avg_salary FROM Employee GROUP BY department_name HAVING AVG(salary)<12000;
+SELECT department_name,AVG(salary) AS avg_salary 
+FROM Employee 
+GROUP BY department_name 
+HAVING AVG(salary)<12000;
 
 -- Q-25
 SELECT * FROM Employee WHERE department_name<>'Accts' AND salary NOT BETWEEN 10000 AND 20000;
